@@ -1,0 +1,108 @@
+{% extends '../base.html' %}
+{% block content %}
+<section class="page-title-area">
+    <div class="container">
+        <div class="page-title-content">
+            <h1>Search Results for
+                <span style="text-transform: uppercase;">
+                    {{keyword}}
+                </span>
+            </h1>
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li>Search Results</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="products-area ptb-70">
+    <div class="container">
+        <div class="drodo-grid-sorting row align-items-center">
+            <div class="col-lg-6 col-md-6 result-count">
+                <p>We found <span class="count">99</span> products available for you</p>
+
+            </div>
+            <div class="col-lg-6 col-md-6 ordering">
+                <div class="select-box">
+                    <label>Sort By:</label>
+                    <select>
+                        <option>Default</option>
+                        <option>Popularity</option>
+                        <option>Latest</option>
+                        <option>Price: low to high</option>
+                        <option>Price: high to low</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for product in result %}
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single-products-box">
+                    <div class="image">
+                        <a href="{% url 'product' product.slug  %}" class="d-block"><img
+                                src="{{ product.main_image.url }}" alt="image"></a>
+                        {% if product.sale_price %}
+                        <div class="sale">Sale</div>
+                        {% endif %}
+                        <div class="buttons-list">
+                            <ul>
+                                <li>
+                                    <div class="cart-btn">
+                                        <a href="#">
+                                            <i class='bx bxs-cart-add'></i>
+                                            <span class="tooltip-label">Add to Cart</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="wishlist-btn">
+                                        <a href="#">
+                                            <i class='bx bx-heart'></i>
+                                            <span class="tooltip-label">Add to Wishlist</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="quick-view-btn">
+                                        <a href="#" data-toggle="modal" data-target="#productsQuickView">
+                                            <i class='bx bx-search-alt'></i>
+                                            <span class="tooltip-label">Quick View</span>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h3><a href="{% url 'product' product.slug %}">{{product}}</a></h3>
+                        <div class="price">
+
+                            {% if product.sale_price %}
+                            <span class="old-price">{{product.price}}</span>
+                            <span class="new-price">{{ product.sale_price }}</span>
+                            {% else %}
+                            <span class="new-price">{{ product.price }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="col-lg-12 col-md-12">
+                <div class="pagination-area text-center">
+                    <a href="#" class="prev page-numbers"><i class='bx bx-chevrons-right'></i></a>
+                    <span class="page-numbers current" aria-current="page">1</span>
+                    <a href="#" class="page-numbers">2</a>
+                    <a href="#" class="page-numbers">3</a>
+                    <a href="#" class="page-numbers">4</a>
+                    <a href="#" class="next page-numbers"><i class='bx bx-chevrons-left'></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,590 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="page-title-area">
+    <div class="container">
+        <div class="page-title-content">
+            <h1>{{ product }}</h1>
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li>{{ product }}</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+<section class="product-details-area pt-70 pb-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-12">
+                <div class="products-details-image">
+                    <ul class="products-details-image-slides owl-theme owl-carousel" data-slider-id="1">
+
+                        <li><img src="{{product.main_image.url }}" alt="image"></li>
+                        {% if product.image1 %}
+                        <li><img src="{{product.image1.url }}" alt="image"></li>
+                        {% endif %}
+                        {% if product.image2%}
+                        <li><img src="{{product.image2.url }}" alt="image"></li>
+                        {% endif %}
+                        {% if product.image3 %}
+                        <li><img src="{{product.image3.url }}" alt="image"></li>
+                        {% endif %}
+                    </ul>
+
+                    <div class="owl-thumbs products-details-image-slides-owl-thumbs" data-slider-id="1">
+                        <div class="owl-thumb-item">
+                            <img src="{{product.main_image.url }}" alt="image">
+                        </div>
+                        {% if product.image1 %}
+                        <div class="owl-thumb-item">
+                            <img src="{{product.image1.url }}" alt="image">
+                        </div>
+                        {% endif %}
+                        {% if product.image2 %}
+                        <div class="owl-thumb-item">
+                            <img src="{{product.image2.url }}" alt="image">
+                        </div>
+                        {% endif %}
+                        {% if product.image3%}
+                        <div class="owl-thumb-item">
+                            <img src="{{product.image3.url }}" alt="image">
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-12">
+                <div class="products-details-desc">
+                    <h3>{{product }}</h3>
+                    <div class="price">
+                        {% if product.sale_price %}
+                        <span class="new-price">{{product.price}}</span>
+                        <span class="old-price">{{product.sale_price }}</span>
+                        {% else %}
+                        <span class="new-price">{{product.price}}</span>
+                        {% endif %}
+                    </div>
+                    <div class="products-review">
+                        <div class="rating">
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                        </div>
+                        <a href="#" class="rating-count">3 reviews</a>
+                    </div>
+                    <ul class="products-info">
+                        <li><span>Vendor:</span> <a href="#">Lereve</a></li>
+                        <li><span>Availability:</span> <a href="#">In stock (7 items)</a></li>
+                        <li><span>Products Type:</span> <a href="#">Mask</a></li>
+                    </ul>
+                    <div class="products-color-switch">
+                        <span>Color:</span>
+                        <ul>
+                            <li><a href="#" title="Black" class="color-black"></a></li>
+                            <li><a href="#" title="White" class="color-white"></a></li>
+                            <li class="active"><a href="#" title="Green" class="color-green"></a></li>
+                            <li><a href="#" title="Yellow Green" class="color-yellowgreen"></a></li>
+                            <li><a href="#" title="Teal" class="color-teal"></a></li>
+                        </ul>
+                    </div>
+                    <div class="products-size-wrapper">
+                        <span>Size:</span>
+                        <ul>
+                            <li><a href="#">XS</a></li>
+                            <li class="active"><a href="#">S</a></li>
+                            <li><a href="#">M</a></li>
+                            <li><a href="#">XL</a></li>
+                            <li><a href="#">XXL</a></li>
+                        </ul>
+                    </div>
+                    <div class="products-info-btn">
+                        <a href="customer-service.html"><i class='bx bxs-truck'></i> Shipping</a>
+                        <a href="contact.html"><i class='bx bx-envelope'></i> Ask about this products</a>
+                    </div>
+                    <div class="products-add-to-cart">
+                        <form action="{% url 'add_to_cart' %}" method="POST">
+                            {%csrf_token%}
+                            <input type="hidden" name="product_id" value="{{product.id}}">
+                            <div class="input-counter">
+                                <span class="minus-btn"><i class='bx bx-minus'></i></span>
+                                <input type="text" name="qty" value="1" min="1">
+                                <span class="plus-btn"><i class='bx bx-plus'></i></span>
+                            </div>
+                            <button type="submit" class="default-btn"><i class="flaticon-trolley"></i> Add to
+                                Cart</button>
+                        </form>
+                    </div>
+                    <div class="wishlist-btn">
+                        <a href="#"><i class='bx bx-heart'></i> Add to Wishlist</a>
+                    </div>
+                    <div class="buy-checkbox-btn">
+                        <div class="item">
+                            <input class="inp-cbx" id="cbx" type="checkbox">
+                            <label class="cbx" for="cbx">
+                                <span>
+                                    <svg width="12px" height="10px" viewbox="0 0 12 10">
+                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                    </svg>
+                                </span>
+                                <span>I agree with the terms and conditions</span>
+                            </label>
+                        </div>
+                        <div class="item">
+                            <a href="#" class="default-btn">Buy it now!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+                <div class="products-details-tabs">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item"><a class="nav-link active" id="description-tab" data-toggle="tab"
+                                href="#description" role="tab" aria-controls="description">Description</a></li>
+                        <li class="nav-item"><a class="nav-link" id="shipping-tab" data-toggle="tab" href="#shipping"
+                                role="tab" aria-controls="shipping">Shipping</a></li>
+                        <li class="nav-item"><a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews"
+                                role="tab" aria-controls="reviews">Reviews (2)</a></li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="description" role="tabpanel">
+                            <p>This story, dazzling in its powerful simplicity and soul-stirring wisdom, is about an
+                                Andalusian shepherd boy named Santiago who travels from his homeland in Spain to the
+                                Egyptian desert in search of a treasure buried near the Pyramids. Lorem ipsum dolor sit.
+                            </p>
+                            <ul>
+                                <li>Instant Drodo bestseller</li>
+                                <li>Translated into 18 languages</li>
+                                <li>#1 Most Recommended Book of the year.</li>
+                                <li>A neglected project, widely dismissed, its champion written off as unhinged.</li>
+                                <li>Yields a negative result in an experiment because of a flaw in the design of the
+                                    experiment.</li>
+                                <li>An Amazon, Bloomberg, Financial Times, Forbes, Inc., Newsweek, Strategy + Business,
+                                    Tech Crunch, Washington Post Best Business Book of the year</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane fade" id="shipping" role="tabpanel">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td>Shipping</td>
+                                            <td>This item Ship to USA</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Delivery</td>
+                                            <td>
+                                                Estimated between Wednesday 07/31/2020 and Monday 08/05/2020 <br>
+                                                Will usually ship within 1 bussiness day.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="reviews" role="tabpanel">
+                            <div class="products-reviews">
+                                <h3>Products Rating</h3>
+                                <div class="rating">
+                                    <span class="bx bxs-star checked"></span>
+                                    <span class="bx bxs-star checked"></span>
+                                    <span class="bx bxs-star checked"></span>
+                                    <span class="bx bxs-star checked"></span>
+                                    <span class="bx bxs-star"></span>
+                                </div>
+                                <div class="rating-count">
+                                    <span>4.1 average based on 4 reviews.</span>
+                                </div>
+                                <div class="row">
+                                    <div class="side">
+                                        <div>5 star</div>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="bar-container">
+                                            <div class="bar-5"></div>
+                                        </div>
+                                    </div>
+                                    <div class="side right">
+                                        <div>02</div>
+                                    </div>
+                                    <div class="side">
+                                        <div>4 star</div>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="bar-container">
+                                            <div class="bar-4"></div>
+                                        </div>
+                                    </div>
+                                    <div class="side right">
+                                        <div>03</div>
+                                    </div>
+                                    <div class="side">
+                                        <div>3 star</div>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="bar-container">
+                                            <div class="bar-3"></div>
+                                        </div>
+                                    </div>
+                                    <div class="side right">
+                                        <div>04</div>
+                                    </div>
+                                    <div class="side">
+                                        <div>2 star</div>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="bar-container">
+                                            <div class="bar-2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="side right">
+                                        <div>05</div>
+                                    </div>
+                                    <div class="side">
+                                        <div>1 star</div>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="bar-container">
+                                            <div class="bar-1"></div>
+                                        </div>
+                                    </div>
+                                    <div class="side right">
+                                        <div>00</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="products-review-comments">
+                                <h3>3 Reviews</h3>
+                                <div class="user-review">
+                                    <img src="assets/img/user1.jpg" alt="image">
+                                    <div class="review-rating">
+                                        <div class="review-stars">
+                                            <i class='bx bxs-star checked'></i>
+                                            <i class='bx bxs-star checked'></i>
+                                            <i class='bx bxs-star checked'></i>
+                                            <i class='bx bxs-star checked'></i>
+                                            <i class='bx bxs-star checked'></i>
+                                        </div>
+                                        <span class="d-inline-block">James Anderson</span>
+                                    </div>
+                                    <span class="d-block sub-comment">Excellent</span>
+                                    <p>Very well built theme, couldn't be happier with it. Can't wait for future updates
+                                        to see what else they add in.</p>
+                                </div>
+                                <div class="user-review">
+                                    <img src="assets/img/user2.jpg" alt="image">
+                                    <div class="review-rating">
+                                        <div class="review-stars">
+                                            <i class='bx bxs-star checked'></i>
+                                            <i class='bx bxs-star checked'></i>
+                                            <i class='bx bxs-star checked'></i>
+                                            <i class='bx bxs-star'></i>
+                                            <i class='bx bxs-star'></i>
+                                        </div>
+                                        <span class="d-inline-block">Sarah Taylor</span>
+                                    </div>
+                                    <span class="d-block sub-comment">Video Quality!</span>
+                                    <p>Was really easy to implement and they quickly answer my additional questions!</p>
+                                </div>
+                                <div class="user-review">
+                                    <img src="assets/img/user3.jpg" alt="image">
+                                    <div class="review-rating">
+                                        <div class="review-stars">
+                                            <i class='bx bxs-star checked'></i>
+                                            <i class='bx bxs-star checked'></i>
+                                            <i class='bx bxs-star checked'></i>
+                                            <i class='bx bxs-star checked'></i>
+                                            <i class='bx bxs-star checked'></i>
+                                        </div>
+                                        <span class="d-inline-block">David Warner</span>
+                                    </div>
+                                    <span class="d-block sub-comment">Perfect Coding!</span>
+                                    <p>Stunning design, very dedicated crew who welcome new ideas suggested by
+                                        customers, nice support.</p>
+                                </div>
+                                <div class="user-review">
+                                    <img src="assets/img/user4.jpg" alt="image">
+                                    <div class="review-rating">
+                                        <div class="review-stars">
+                                            <i class='bx bxs-star checked'></i>
+                                            <i class='bx bxs-star checked'></i>
+                                            <i class='bx bxs-star checked'></i>
+                                            <i class='bx bxs-star checked'></i>
+                                            <i class='bx bxs-star'></i>
+                                        </div>
+                                        <span class="d-inline-block">King Kong</span>
+                                    </div>
+                                    <span class="d-block sub-comment">Perfect Video!</span>
+                                    <p>Stunning design, very dedicated crew who welcome new ideas suggested by
+                                        customers, nice support.</p>
+                                </div>
+                            </div>
+                            <div class="review-form-wrapper">
+                                <h3>Add a review</h3>
+                                <p class="comment-notes">Your email address will not be published. Required fields are
+                                    marked <span>*</span></p>
+                                <form>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="rating">
+                                                <input type="radio" id="star5" name="rating" value="5" /><label
+                                                    for="star5"></label>
+                                                <input type="radio" id="star4" name="rating" value="4" /><label
+                                                    for="star4"></label>
+                                                <input type="radio" id="star3" name="rating" value="3" /><label
+                                                    for="star3"></label>
+                                                <input type="radio" id="star2" name="rating" value="2" /><label
+                                                    for="star2"></label>
+                                                <input type="radio" id="star1" name="rating" value="1" /><label
+                                                    for="star1"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Name *">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" placeholder="Email *">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="form-group">
+                                                <textarea placeholder="Your review" class="form-control" cols="30"
+                                                    rows="6"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12">
+                                            <p class="comment-form-cookies-consent">
+                                                <input type="checkbox" id="test1">
+                                                <label for="test1">Save my name, email, and website in this browser for
+                                                    the next time I comment.</label>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12">
+                                            <button type="submit" class="default-btn">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="related-products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Related Products</h2>
+            </div>
+            <div class="products-slides owl-carousel owl-theme">
+                <div class="single-products-box">
+                    <div class="image">
+                        <a href="#" class="d-block"><img src="assets/img/products/products-img1.jpg" alt="image"></a>
+                        <div class="new">New</div>
+                        <div class="buttons-list">
+                            <ul>
+                                <li>
+                                    <div class="cart-btn">
+                                        <a href="#">
+                                            <i class='bx bxs-cart-add'></i>
+                                            <span class="tooltip-label">Add to Cart</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="wishlist-btn">
+                                        <a href="#">
+                                            <i class='bx bx-heart'></i>
+                                            <span class="tooltip-label">Add to Wishlist</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="quick-view-btn">
+                                        <a href="#" data-toggle="modal" data-target="#productsQuickView">
+                                            <i class='bx bx-search-alt'></i>
+                                            <span class="tooltip-label">Quick View</span>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h3><a href="#">Coronavirus Face Mask</a></h3>
+                        <div class="price">
+                            <span class="new-price">$39.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-products-box">
+                    <div class="image">
+                        <a href="#" class="d-block"><img src="assets/img/products/products-img2.jpg" alt="image"></a>
+                        <div class="sale">Sale</div>
+                        <div class="buttons-list">
+                            <ul>
+                                <li>
+                                    <div class="cart-btn">
+                                        <a href="#">
+                                            <i class='bx bxs-cart-add'></i>
+                                            <span class="tooltip-label">Add to Cart</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="wishlist-btn">
+                                        <a href="#">
+                                            <i class='bx bx-heart'></i>
+                                            <span class="tooltip-label">Add to Wishlist</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="quick-view-btn">
+                                        <a href="#" data-toggle="modal" data-target="#productsQuickView">
+                                            <i class='bx bx-search-alt'></i>
+                                            <span class="tooltip-label">Quick View</span>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h3><a href="#">Protective Gloves</a></h3>
+                        <div class="price">
+                            <span class="new-price">$99.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-products-box">
+                    <div class="image">
+                        <a href="#" class="d-block"><img src="assets/img/products/products-img3.jpg" alt="image"></a>
+                        <div class="new">New</div>
+                        <div class="buttons-list">
+                            <ul>
+                                <li>
+                                    <div class="cart-btn">
+                                        <a href="#">
+                                            <i class='bx bxs-cart-add'></i>
+                                            <span class="tooltip-label">Add to Cart</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="wishlist-btn">
+                                        <a href="#">
+                                            <i class='bx bx-heart'></i>
+                                            <span class="tooltip-label">Add to Wishlist</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="quick-view-btn">
+                                        <a href="#" data-toggle="modal" data-target="#productsQuickView">
+                                            <i class='bx bx-search-alt'></i>
+                                            <span class="tooltip-label">Quick View</span>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h3><a href="#">Infrared Thermometer Gun</a></h3>
+                        <div class="price">
+                            <span class="old-price">$99.00</span>
+                            <span class="new-price">$90.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-products-box">
+                    <div class="image">
+                        <a href="#" class="d-block"><img src="assets/img/products/products-img4.jpg" alt="image"></a>
+                        <div class="new">New</div>
+                        <div class="buttons-list">
+                            <ul>
+                                <li>
+                                    <div class="cart-btn">
+                                        <a href="#">
+                                            <i class='bx bxs-cart-add'></i>
+                                            <span class="tooltip-label">Add to Cart</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="wishlist-btn">
+                                        <a href="#">
+                                            <i class='bx bx-heart'></i>
+                                            <span class="tooltip-label">Add to Wishlist</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="quick-view-btn">
+                                        <a href="#" data-toggle="modal" data-target="#productsQuickView">
+                                            <i class='bx bx-search-alt'></i>
+                                            <span class="tooltip-label">Quick View</span>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h3><a href="#">Hand Sanitizer</a></h3>
+                        <div class="price">
+                            <span class="new-price">$59.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-products-box">
+                    <div class="image">
+                        <a href="#" class="d-block"><img src="assets/img/products/products-img5.jpg" alt="image"></a>
+                        <div class="new">New</div>
+                        <div class="buttons-list">
+                            <ul>
+                                <li>
+                                    <div class="cart-btn">
+                                        <a href="#">
+                                            <i class='bx bxs-cart-add'></i>
+                                            <span class="tooltip-label">Add to Cart</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="wishlist-btn">
+                                        <a href="#">
+                                            <i class='bx bx-heart'></i>
+                                            <span class="tooltip-label">Add to Wishlist</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="quick-view-btn">
+                                        <a href="#" data-toggle="modal" data-target="#productsQuickView">
+                                            <i class='bx bx-search-alt'></i>
+                                            <span class="tooltip-label">Quick View</span>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h3><a href="#">Cosmetic Containers</a></h3>
+                        <div class="price">
+                            <span class="new-price">$139.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

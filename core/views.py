@@ -1,0 +1,46 @@
+from django.shortcuts import render
+from .models import Product
+from django.core.paginator import Paginator
+from django.db.models import Q
+
+# Create your views here.
+
+
+def index(request):
+
+    if not request.session or not request.session.session_key:
+        request.session.save()
+    print(request.session.session_key)
+    return render(request, 'core/index.html')
+
+
+def product(request, slug):
+    product = Product.objects.get(slug=slug)
+    # related = Product.objects.featured().order_by('-price')[:3]
+    # reviews = Review.objects.all().filter(product = product).order_by('-timestamp')
+    # reviews_count = reviews.count()
+    context = {
+        'product': product,
+    }
+
+    return render(request, 'core/product.html', context)
+
+
+def shop(request):
+    products = Product.objects.all()
+    paginator = Paginator(products, 18)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'core/shop.html', {'page_obj': page_obj})
+
+
+def contact(request):
+    return render(request, 'core/contact.html')
+
+
+def search(request):
+    keyword = request.GET.get('s').strip()
+    result = Product.objects.filter(Q(name__icontains=keyword) | Q(
+        description__icontains=keyword))
+
+    return render(request, 'core/search_results.html', {'result': result, 'keyword': keyword})
