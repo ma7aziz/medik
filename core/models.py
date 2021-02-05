@@ -33,6 +33,7 @@ class Product(models.Model):
     image2 = models.ImageField(upload_to='products/', blank=True, null=True)
     image3 = models.ImageField(upload_to='products/', blank=True, null=True)
     image4 = models.ImageField(upload_to='products/', blank=True, null=True)
+    # product type
 
     objects = ProductManager()
 

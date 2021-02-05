@@ -52,14 +52,14 @@
                             </td>
                             <td class="product-quantity">
                                 <div class="input-counter">
-                                    <span class="minus-btn"><i class='bx bx-minus'></i></span>
+                                    <span class="minus-btn" data-id="{{product.id}}"><i class='bx bx-minus'></i></span>
                                     <input type="text" min="1" value="{{product.qty}}">
-                                    <span class="plus-btn"><i class='bx bx-plus'></i></span>
+                                    <span class="plus-btn" data-id="{{product.id}}"><i class='bx bx-plus'></i></span>
                                 </div>
                             </td>
                             <td class="product-subtotal">
                                 <span class="subtotal-amount">{{product.total_price}}</span>
-                                <a href="#" class="remove"><i class='bx bx-trash'></i></a>
+                                <a href="/delete_cart/{{product.id}}" class="remove"><i class='bx bx-trash'></i></a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="col-lg-5 col-sm-5 col-md-5 text-right">
-                        <a href="#" class="default-btn"><i class="flaticon-view"></i> Update Cart</a>
+                        <a href="" class="default-btn"><i class="flaticon-view"></i> Update Cart</a>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,8 @@
                     <li>Shipping <span>$30.00</span></li>
                     <li>Total <span>{{cart.cart_price}}</span></li>
                 </ul>
-                <a href="checkout.html" class="default-btn"><i class="flaticon-trolley"></i> Proceed to Checkout</a>
+                <a href="{% url 'checkout' %}" class="default-btn"><i class="flaticon-trolley"></i> Proceed to
+                    Checkout</a>
             </div>
         </form>
     </div>
@@ -137,5 +138,70 @@
     </div>
 </section>
 
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- plus qty -->
+<script>
+    $(document).ready(function () {
+
+        if ($('#quantity').val() >= $('#quantity').attr('max')) {
+            console.log($('#quantity').attr('max'))
+
+        } else {
+
+
+
+            $('.plus-btn').on('click', function (e) {
+                console.log($('#quantity').val(), $('#quantity').attr('max'))
+                e.preventDefault()
+                product_id = $(this).attr('data-id')
+                console.log(product_id)
+                data = {
+                    product_id: product_id
+                }
+
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url "plus_cart" %}',
+                    data: data,
+                    success: function (data) {
+                        /* let cartCount = $('#cart_count')*/
+
+                        console.log('success')
+
+                    }
+                })
+            })
+        }
+
+    });
+</script>
+<!-- minus cart item quantity  -->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.minus-btn').on('click', function (e) {
+            e.preventDefault()
+            product_id = $(this).attr('data-id')
+            console.log(product_id)
+            data = {
+                product_id: product_id
+            }
+
+            $.ajax({
+                type: 'GET',
+                url: '{% url "minus_cart" %}',
+                data: data,
+                success: function (data) {
+                    /* let cartCount = $('#cart_count')*/
+
+                    console.log('success')
+
+                }
+            })
+        })
+    });
+</script>
 
 {% endblock %}

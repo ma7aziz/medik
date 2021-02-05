@@ -54,6 +54,38 @@ def add_to_cart(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+def plus_cart(request):
+    """
+    change product quantitiy in cart (plus)
+    """
+
+    cart_item = Cart_item.objects.get(pk=request.GET.get('product_id'))
+    cart_item.qty += 1
+    cart_item.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def minus_cart(request):
+    """
+    change product quantitiy in cart (minus)
+    """
+    cart_item = Cart_item.objects.get(pk=request.GET.get('product_id'))
+    if cart_item.qty > 1:
+        cart_item.qty -= 1
+        cart_item.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def delete_cart(request, cart_id):
+    """
+    Remove product from cart 
+    """
+    cart = Cart_item.objects.get(id=cart_id)
+    cart.delete()
+    messages.success(request, 'Item Removed From Your Cart !')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
 def checkout(request):
     return render(request, 'orders/checkout.html')
 

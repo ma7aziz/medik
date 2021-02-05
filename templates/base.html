@@ -92,7 +92,7 @@
                     <div class="logo">
                         <a href="{% url 'index' %}">
                             <!-- <img src="assets/img/logo.png" alt="logo"> -->
-                            MEDIK
+                            MEDSTORE
                         </a>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                 <nav class="navbar navbar-expand-md navbar-light">
                     <a class="navbar-brand" href="{% url 'index' %}">
                         <!-- <img src="assets/img/logo.png" alt="logo"> -->
-                        MEDIK
+                        MEDSTORE
                     </a>
                     <div class="collapse navbar-collapse mean-menu">
                         <ul class="navbar-nav">
@@ -275,7 +275,13 @@
                             <div class="option-item">
                                 <div class="cart-btn">
                                     <a href="#" data-toggle="modal" data-target="#shoppingCartModal"><i
-                                            class='bx bx-shopping-bag'></i><span>{{ cart.cart_count }}</span></a>
+                                            class='bx bx-shopping-bag'></i>
+                                        {% if cart.cart_count > 0 %}
+                                        <span>
+                                            {{ cart.cart_count }}
+                                        </span>
+                                        {% endif %}
+                                    </a>
                                 </div>
                             </div>
                             <div class="option-item">
@@ -340,7 +346,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <a href="#" class="remove-btn"><i class='bx bx-trash'></i></a>
+                            <a href="/delete_cart/{{product.id}}" class="remove-btn"><i class='bx bx-trash'></i></a>
                         </div>
                         {% endfor %}
 
@@ -354,7 +360,7 @@
                         <a href="{% url 'cart' %}" class="default-btn">View Cart </a>
                     </div>
                     <div class="products-cart-btn">
-                        <a href="#" class="default-btn">Proceed to Checkout</a>
+                        <a href="{% url 'checkout' %}" class="default-btn">Proceed to Checkout</a>
                     </div>
                 </div>
             </div>
