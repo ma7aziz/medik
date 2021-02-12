@@ -3,6 +3,13 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class ProductManager(models.Manager):
     def all(self):
         return self.filter(active=True)
@@ -19,7 +26,8 @@ class ProductManager(models.Manager):
 class Product(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(allow_unicode=True, unique=True)
-    category = models.CharField(max_length=50)
+    category = models.ForeignKey(
+        Category, on_delete=models.SET_NULL, null=True, blank=True)
     description = RichTextField()
     # color = models.CharField(max_length=50)
     price = models.IntegerField()

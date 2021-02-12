@@ -117,68 +117,15 @@
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col">
-                                                    <h6 class="submenu-title">Shop Styles</h6>
+                                                    <h6 class="submenu-title">Categories</h6>
                                                     <ul class="megamenu-submenu">
-                                                        <li><a href="products-left-sidebar.html">Left Sidebar</a></li>
-                                                        <li><a href="products-left-sidebar-with-categories.html">Left
-                                                                Sidebar With Categories</a></li>
-                                                        <li><a href="products-right-sidebar.html">Right Sidebar</a></li>
-                                                        <li><a href="products-right-sidebar-with-categories.html">Right
-                                                                Sidebar With Categories</a></li>
-                                                        <li><a href="products-without-sidebar.html">Without Sidebar</a>
+                                                        {% for category in categories %}
+                                                        <li><a href="{% url 'category' category %}">{{ category }}</a>
                                                         </li>
-                                                        <li><a href="products-left-sidebar-fullwidth.html">With Left
-                                                                Sidebar Fullwidth</a></li>
-                                                        <li><a href="products-right-sidebar-fullwidth.html">With Right
-                                                                Sidebar Fullwidth</a></li>
+                                                        {% endfor %}
                                                     </ul>
                                                 </div>
-                                                <div class="col">
-                                                    <h6 class="submenu-title">Shop Styles 2</h6>
-                                                    <ul class="megamenu-submenu">
-                                                        <li><a href="products-left-sidebar.html">Left Sidebar</a></li>
-                                                        <li><a href="products-left-sidebar-with-categories.html">Left
-                                                                Sidebar With Categories</a></li>
-                                                        <li><a href="products-right-sidebar.html">Right Sidebar</a></li>
-                                                        <li><a href="products-right-sidebar-with-categories.html">Right
-                                                                Sidebar With Categories</a></li>
-                                                        <li><a href="products-without-sidebar.html">Without Sidebar</a>
-                                                        </li>
-                                                        <li><a href="products-left-sidebar-fullwidth.html">With Left
-                                                                Sidebar Fullwidth</a></li>
-                                                        <li><a href="products-right-sidebar-fullwidth.html">With Right
-                                                                Sidebar Fullwidth</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col">
-                                                    <h6 class="submenu-title">Shop Styles 3</h6>
-                                                    <ul class="megamenu-submenu">
-                                                        <li><a href="products-left-sidebar.html">Left Sidebar</a></li>
-                                                        <li><a href="products-left-sidebar-with-categories.html">Left
-                                                                Sidebar With Categories</a></li>
-                                                        <li><a href="products-right-sidebar.html">Right Sidebar</a></li>
-                                                        <li><a href="products-right-sidebar-with-categories.html">Right
-                                                                Sidebar With Categories</a></li>
-                                                        <li><a href="products-without-sidebar.html">Without Sidebar</a>
-                                                        </li>
-                                                        <li><a href="products-left-sidebar-fullwidth.html">With Left
-                                                                Sidebar Fullwidth</a></li>
-                                                        <li><a href="products-right-sidebar-fullwidth.html">With Right
-                                                                Sidebar Fullwidth</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col">
-                                                    <h6 class="submenu-title">Product Pages</h6>
-                                                    <ul class="megamenu-submenu">
-                                                        <li><a href="single-products-1.html">Default Style</a></li>
-                                                        <li><a href="single-products-2.html">Thumbs List</a></li>
-                                                        <li><a href="single-products-3.html">Grid Style</a></li>
-                                                        <li><a href="single-products-4.html">Sticky Details</a></li>
-                                                        <li><a href="single-products-5.html">Slider Image</a></li>
-                                                        <li><a href="cart.html">Cart</a></li>
-                                                        <li><a href="checkout.html">Checkout</a></li>
-                                                    </ul>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </li>
@@ -234,28 +181,7 @@
                                                         <li><a href="track-order.html">Tracking Order</a></li>
                                                     </ul>
                                                 </div>
-                                                <div class="col">
-                                                    <ul class="megamenu-submenu">
-                                                        <li>
-                                                            <div class="aside-trending-products">
-                                                                <img src="assets/img/navbar/navbar-img1.jpg"
-                                                                    alt="image">
-                                                                <div class="category">
-                                                                    <h4>Top Trending</h4>
-                                                                </div>
-                                                                <a href="#" class="link-btn"></a>
-                                                            </div>
-                                                            <div class="aside-trending-products">
-                                                                <img src="assets/img/navbar/navbar-img2.jpg"
-                                                                    alt="image">
-                                                                <div class="category">
-                                                                    <h4>Popular Products</h4>
-                                                                </div>
-                                                                <a href="#" class="link-btn"></a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </li>

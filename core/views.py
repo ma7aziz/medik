@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product
+from .models import Product, Category
 from django.core.paginator import Paginator
 from django.db.models import Q
 
@@ -26,12 +26,26 @@ def product(request, slug):
     return render(request, 'core/product.html', context)
 
 
+def category(request, category):
+    category = Category.objects.all().filter(name=category)[0]
+    products = Product.objects.all().filter(category=category)
+    paginator = Paginator(products, 18)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    recent = Product.objects.all().order_by('-timestamp')[:4]
+    context = {'page_obj': page_obj,
+               'category': category,
+               'recent': recent}
+    return render(request, 'core/category.html', context)
+
+
 def shop(request):
     products = Product.objects.all()
     paginator = Paginator(products, 18)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'core/shop.html', {'page_obj': page_obj})
+    recent = Product.objects.all().order_by('-timestamp')[:3]
+    return render(request, 'core/shop.html', {'page_obj': page_obj, 'recent': recent})
 
 
 def contact(request):
