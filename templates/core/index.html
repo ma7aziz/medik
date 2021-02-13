@@ -210,19 +210,12 @@
                                     </a>
                                 </div>
                             </li>
-                            <li>
-                                <div class="wishlist-btn">
-                                    <a href="#">
-                                        <i class='bx bx-heart'></i>
-                                        <span class="tooltip-label">Add to Wishlist</span>
-                                    </a>
-                                </div>
-                            </li>
+
                             <li>
                                 <div class="quick-view-btn">
-                                    <a href="#" data-toggle="modal" data-target="#productsQuickView">
+                                    <a href="{% url 'product' product.slug %}">
                                         <i class='bx bx-search-alt'></i>
-                                        <span class="tooltip-label">Quick View</span>
+                                        <span class="tooltip-label">View</span>
                                     </a>
                                 </div>
                             </li>
@@ -266,25 +259,22 @@
                             <ul>
                                 <li>
                                     <div class="cart-btn">
-                                        <a href="#">
+                                        <a id="quick_add">
                                             <i class='bx bxs-cart-add'></i>
                                             <span class="tooltip-label">Add to Cart</span>
                                         </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="wishlist-btn">
-                                        <a href="#">
-                                            <i class='bx bx-heart'></i>
-                                            <span class="tooltip-label">Add to Wishlist</span>
-                                        </a>
+                                        <form action="{% url 'add_to_cart' %}" method="POST" id="quick_add_form">
+                                            <input type="hidden" name="qty" value="1">
+                                            <input type="hidden" name="product_id" value="{{product.id}}">
+                                            {% csrf_token %}
+                                        </form>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="quick-view-btn">
-                                        <a href="#" data-toggle="modal" data-target="#productsQuickView">
+                                        <a href="{% url 'product' product.slug %}">
                                             <i class='bx bx-search-alt'></i>
-                                            <span class="tooltip-label">Quick View</span>
+                                            <span class="tooltip-label">View</span>
                                         </a>
                                     </div>
                                 </li>
@@ -309,5 +299,12 @@
         </div>
     </div>
 </section>
+<script>
+    form = document.getElementById('quick_add_form')
+    a = document.getElementById('quick_add')
+    a.addEventListener('click', (e) => {
 
+        form.submit()
+    })
+</script>
 {% endblock %}

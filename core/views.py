@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Product, Category
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 
@@ -58,3 +59,11 @@ def search(request):
         description__icontains=keyword))
 
     return render(request, 'core/search_results.html', {'result': result, 'keyword': keyword})
+
+
+# filter shop
+def filter(request):
+    q = request.GET.get('q')
+    print(q)
+    return HttpResponseRedirect('shop')
+# filter category

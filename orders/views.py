@@ -14,7 +14,6 @@ def cart(request):
 
 
 def add_to_cart(request):
-    print(request.POST['qty'])
     if not request.session or not request.session.session_key:
         request.session.save()
     product = Product.objects.get(id=request.POST.get('product_id'))
@@ -111,5 +110,4 @@ def place_order(request):
     for pro in cart.cart_item_set.all():
         pro.item.times_sold += 1
         pro.item.save()
-    # return render(request, 'order_success.html', {'order': order, 'subtotal': cart.cart_price()})
-    return JsonResponse('order success! ', safe=False)
+    return render(request, 'orders/order_success.html')

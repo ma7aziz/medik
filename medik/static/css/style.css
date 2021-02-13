@@ -4,7 +4,7 @@
 :root {
     --fontFamily: 'Open Sans', sans-serif;
     --fontFamily2: 'Hind Siliguri', sans-serif;
-    --mainColor: #2a96ff;
+    --mainColor: #134e5e;
     --optionalColor: #696969;
     --whiteColor: #ffffff;
     --blackColor: #111111;
@@ -118,7 +118,9 @@ p:last-child {
     position: relative;
     z-index: 1;
     border: none;
-    background-color: var(--mainColor);
+    background: linear-gradient(to right, #134e5e, #71b280);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    ;
     color: var(--whiteColor);
     border-radius: 5px;
     -webkit-box-shadow: unset;
@@ -2419,10 +2421,15 @@ textarea.form-control {
 }
 
 .single-products-box {
-    margin-bottom: 30px
+
+    margin-bottom: 30px;
+    padding: 15px;
+    /* box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px; */
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 .single-products-box .image {
+    height: 300px;
     position: relative;
     overflow: hidden
 }
@@ -2449,9 +2456,9 @@ textarea.form-control {
     z-index: 2;
     left: 12px;
     top: 12px;
-    background-color: red;
+    background-color: #5b9a78;
     color: var(--whiteColor);
-    padding: 1px 12px;
+    padding: 3px 15px;
     font-size: 14px;
     font-weight: 600
 }
@@ -2562,6 +2569,8 @@ textarea.form-control {
 }
 
 .single-products-box .content {
+    justify-content: center;
+    height: 100px;
     margin-top: 25px
 }
 
