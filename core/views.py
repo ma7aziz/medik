@@ -11,7 +11,6 @@ def index(request):
 
     if not request.session or not request.session.session_key:
         request.session.save()
-    print(request.session.session_key)
     return render(request, 'core/index.html')
 
 
@@ -70,6 +69,4 @@ def filter(request):
     q = request.GET.get('q')
     print(q)
     return HttpResponseRedirect('shop')
-
-
 # filter category

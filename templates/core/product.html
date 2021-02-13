@@ -363,7 +363,7 @@
             </div>
             <div class="row">
                 {% for product in related %}
-                <div class=" col col-md-3 col-sm-6 single-products-box">
+                <div class=" col col-md-4 col-sm-6 single-products-box">
                     <div class="image">
                         <a href="{% url 'product' product.slug %}" class="d-block"><img src="{{product.main_image.url}}"
                                 alt="image"></a>
