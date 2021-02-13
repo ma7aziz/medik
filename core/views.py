@@ -17,11 +17,15 @@ def index(request):
 
 def product(request, slug):
     product = Product.objects.get(slug=slug)
-    # related = Product.objects.featured().order_by('-price')[:3]
+    category = product.category
+    brand = product.brand
+    related = Product.objects.all().exclude(name=product.name).filter(Q(category=category) |
+                                                                      Q(brand=brand)).order_by('-price')[:3]
     # reviews = Review.objects.all().filter(product = product).order_by('-timestamp')
     # reviews_count = reviews.count()
     context = {
         'product': product,
+        'related': related
     }
 
     return render(request, 'core/product.html', context)
@@ -66,4 +70,6 @@ def filter(request):
     q = request.GET.get('q')
     print(q)
     return HttpResponseRedirect('shop')
+
+
 # filter category

@@ -42,7 +42,8 @@ class Product(models.Model):
     image2 = models.ImageField(upload_to='products/', blank=True, null=True)
     image3 = models.ImageField(upload_to='products/', blank=True, null=True)
     image4 = models.ImageField(upload_to='products/', blank=True, null=True)
-    # product type
+    product_type = models.CharField(max_length=100, blank=True)
+    brand = models.CharField(max_length=100, blank=True)
 
     objects = ProductManager()
 
