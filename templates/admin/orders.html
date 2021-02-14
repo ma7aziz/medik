@@ -1,0 +1,85 @@
+{% extends '../base.html' %}
+{% block title %}Orders{% endblock %}
+{% block content %}
+
+<div class="container" style="padding: 35px 0">
+    <div class="row">
+        <div class="col-lg-9 mb-3">
+            <h2>Recieved Orders </h2>
+        </div>
+    </div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Customer</th>
+                <th>Order Price </th>
+                <th>Order Time</th>
+                <th>Status</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in page_obj %}
+            <tr>
+                <td><a href="/order/{{order.id}}" style="">{{order.id}}</a></td>
+                <td><a href="/order/{{order.id}}" style="">{{order.customer}}</a></td>
+                <td>{{order.price}}</td>
+                <td>{{order.timestamp}}</td>
+
+                <td>
+                    <form action="{% url 'update_status'%}" method="POST">
+                        {% csrf_token %}
+                        <select name="status" id="">
+                            <option value="1" {% if order.status == '1'%} selected="selected" {% endif %}>
+                                Recieved</option>
+                            <option value="2" {% if order.status == '2'%} selected="selected" {% endif %}>
+                                Confirmed</option>
+                            <option value="3" {% if order.status == '3'%} selected="selected" {% endif %}>
+                                Shipped</option>
+                            <option value="4" {% if order.status == '4'%} selected="selected" {% endif %}>
+                                Delivered</option>
+                        </select>
+                        <input type="hidden" name="order_id" value="{{order.id}}">
+                        <input type="submit" value="Update Order Status" class="button-style4">
+                    </form>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</div>
+
+</div>
+<br> <br>
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="pagination-area text-center">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="prev page-numbers">
+                <i class='bx bx-chevrons-right'></i></a>
+            {% endif %}
+            {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+            <span class="page-numbers current" aria-current="page">{{ i }}</span>
+            {% else %}
+            <a href="?page={{ i }}" class="page-numbers">{{ i }}</a>
+            {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="next page-numbers"><i
+                    class='bx bx-chevrons-left'></i></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

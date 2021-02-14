@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
+from django.contrib.auth.decorators import user_passes_test
+from django.core.paginator import Paginator
 
 from .models import Cart, Cart_item, Customer, Order
 
@@ -111,3 +113,35 @@ def place_order(request):
         pro.item.times_sold += 1
         pro.item.save()
     return render(request, 'orders/order_success.html')
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def orders(request):
+    orders = Order.objects.all().order_by('-timestamp')
+    paginator = Paginator(orders, 15)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    count = orders.count()
+    return render(request, 'admin/orders.html',
+                  {'page_obj': page_obj,
+                   # 'count': count,
+                   # 'prices': orders_prices
+                   }
+                  )
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def order_details(request, id):
+    order = Order.objects.get(pk=id)
+    return render(request, 'admin/order_details.html', {'order': order})
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def update_status(request):
+    order = Order.objects.get(pk=request.POST['order_id'])
+    status = request.POST['status']
+    order.status = int(status)
+    order.save()
+    print(order.status)
+    messages.success(request, 'order status hs been updated !')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
