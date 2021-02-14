@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product, Category
+from .models import Product, Category, Brand
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import HttpResponseRedirect
@@ -30,6 +30,15 @@ def product(request, slug):
     return render(request, 'core/product.html', context)
 
 
+def shop(request):
+    products = Product.objects.all()
+    paginator = Paginator(products, 18)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    recent = Product.objects.all().order_by('-timestamp')[:3]
+    return render(request, 'core/shop.html', {'page_obj': page_obj, 'recent': recent})
+
+
 def category(request, category):
     category = Category.objects.all().filter(name=category)[0]
     products = Product.objects.all().filter(category=category)
@@ -43,13 +52,17 @@ def category(request, category):
     return render(request, 'core/category.html', context)
 
 
-def shop(request):
-    products = Product.objects.all()
+def brand(request, brand):
+    brand = Brand.objects.all().filter(name__icontains=brand)[0]
+    products = Product.objects.all().filter(brand=brand)
     paginator = Paginator(products, 18)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    recent = Product.objects.all().order_by('-timestamp')[:3]
-    return render(request, 'core/shop.html', {'page_obj': page_obj, 'recent': recent})
+    recent = Product.objects.all().order_by('-timestamp')[:4]
+    context = {'page_obj': page_obj,
+               'brand': brand,
+               'recent': recent}
+    return render(request, 'core/brand.html', context)
 
 
 def contact(request):
@@ -63,8 +76,9 @@ def search(request):
 
     return render(request, 'core/search_results.html', {'result': result, 'keyword': keyword})
 
-
 # filter shop
+
+
 def filter(request):
     q = request.GET.get('q')
     print(q)

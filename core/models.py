@@ -11,6 +11,13 @@ class Category(models.Model):
         return self.name
 
 
+class Brand(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class ProductManager(models.Manager):
     def all(self):
         return self.filter(active=True)
@@ -43,7 +50,8 @@ class Product(models.Model):
     image3 = models.ImageField(upload_to='products/', blank=True, null=True)
     image4 = models.ImageField(upload_to='products/', blank=True, null=True)
     product_type = models.CharField(max_length=100, blank=True)
-    brand = models.CharField(max_length=100, blank=True)
+    brand = models.ForeignKey(
+        Brand, on_delete=models.SET_NULL, null=True, blank=True)
 
     objects = ProductManager()
 

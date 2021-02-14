@@ -88,7 +88,8 @@
                                     {% for product in cart.cart_item_set.all %}
                                     <tr>
                                         <td class="product-name">
-                                            <a href="#">{{product}}</a>
+                                            <a
+                                                href="{% url 'product' product.item.slug %}">{{product|truncatechars:50}}</a>
                                         </td>
                                         <td class="product-qty">
                                             <span class="subtotal-amount">{{product.qty}}</span>
