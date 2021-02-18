@@ -142,6 +142,5 @@ def update_status(request):
     status = request.POST['status']
     order.status = int(status)
     order.save()
-    print(order.status)
     messages.success(request, 'order status hs been updated !')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

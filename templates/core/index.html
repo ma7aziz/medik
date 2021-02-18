@@ -203,13 +203,18 @@
                     <div class="buttons-list">
                         <ul>
                             <li>
-                                <div class="cart-btn">
+                                <div class="cart-btn" id="add-to-cart">
+
                                     <a href="#">
-                                        <i class='bx bxs-cart-add'></i>
+                                        <i class='bx bxs-cart-add' style="font-size: 20px"></i>
                                         <span class="tooltip-label">Add to Cart</span>
                                     </a>
+
+
                                 </div>
+
                             </li>
+
 
                             <li>
                                 <div class="quick-view-btn">
@@ -223,7 +228,7 @@
                     </div>
                 </div>
                 <div class="content">
-                    <h3><a href="{% url 'product' product.slug %}">{{product}}</a></h3>
+                    <h3><a href="{% url 'product' product.slug %}">{{product|truncatechars:40 }}</a></h3>
                     <div class="price">
                         {% if product.sale_price %}
                         <span class="old-price">{{product.price}}</span>
@@ -282,7 +287,7 @@
                         </div>
                     </div>
                     <div class="content">
-                        <h3><a href="{% url 'product' product.slug %}">{{product}}</a></h3>
+                        <h3><a href="{% url 'product' product.slug %}">{{product|truncatechars:40}}</a></h3>
                         <div class="price">
                             {% if product.sale_price %}
                             <span class="old-price">{{product.price}}</span>
@@ -299,12 +304,27 @@
         </div>
     </div>
 </section>
-<script>
+<!-- <script>
+   // btn = document.getElementById('add-to-cart')
+    // form = document.getElementsByClassName('add-to-cart-form')
+
+    btn.addEventListener('click', (e) => {
+        e.preventDefault()
+        console.log('clicked')
+        // btn.closest('.add-to-cart-form').submit()
+        form = btn.closest('.add-to-cart-form')
+        console.log(form)
+    })
+</script> -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script> -->
+
+<!-- <script>
     form = document.getElementById('quick_add_form')
     a = document.getElementById('quick_add')
     a.addEventListener('click', (e) => {
 
         form.submit()
     })
-</script>
+</script> -->
 {% endblock %}

@@ -27,7 +27,17 @@
                         </div>
                         <a href="#" class="link-btn"></a>
                     </div>
+                    <div class="woocommerce-widget best-seller-widget">
+                        <h3 class="woocommerce-widget-title">Categories</h3>
+                        {% for category in categories %}
+                        <article class="item">
+                            <a href="{% url 'category' category %}" style="font-weight:600">{{category}}</a>
 
+                            <div class="clear"></div>
+                        </article>
+                        {% endfor %}
+
+                    </div>
                     <div class="woocommerce-widget best-seller-widget">
                         <h3 class="woocommerce-widget-title">Best Sellers</h3>
                         {% for product in top_selling %}
