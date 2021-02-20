@@ -33,12 +33,12 @@
                         <tr>
 
                             <td class="product-thumbnail">
-                                <a href="#">
+                                <a href="{% url 'product'  product.item.slug %}">
                                     <img src="{{ product.item.main_image.url }}" alt="item">
                                 </a>
                             </td>
                             <td class="product-name">
-                                <a href="#">{{product}}</a>
+                                <a href="{% url 'product'  product.item.slug %}">{{product}}</a>
                             </td>
                             <td class="product-price">
 
@@ -68,14 +68,7 @@
             </div>
             <div class="cart-buttons">
                 <div class="row align-items-center">
-                    <div class="col-lg-7 col-sm-7 col-md-7">
-                        <div class="shopping-coupon-code">
-                            <input type="text" class="form-control" placeholder="Coupon code" name="coupon-code"
-                                id="coupon-code">
-                            <button type="submit">Apply Coupon</button>
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-sm-5 col-md-5 text-right">
+                    <div class="col-12 text-right">
                         <a href="" class="default-btn"><i class="flaticon-view"></i> Update Cart</a>
                     </div>
                 </div>
@@ -95,48 +88,7 @@
 </section>
 
 
-<section class="facility-area bg-f7f8fa pt-70 pb-40">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-sm-6 col-md-3 col-6">
-                <div class="single-facility-box">
-                    <div class="icon">
-                        <i class="flaticon-free-shipping"></i>
-                    </div>
-                    <h3>Free Shipping</h3>
-                    <p>Free shipping world wide</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-md-3 col-6">
-                <div class="single-facility-box">
-                    <div class="icon">
-                        <i class="flaticon-headset"></i>
-                    </div>
-                    <h3>Support 24/7</h3>
-                    <p>Contact us 24 hours a day</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-md-3 col-6">
-                <div class="single-facility-box">
-                    <div class="icon">
-                        <i class="flaticon-secure-payment"></i>
-                    </div>
-                    <h3>Secure Payments</h3>
-                    <p>100% payment protection</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-md-3 col-6">
-                <div class="single-facility-box">
-                    <div class="icon">
-                        <i class="flaticon-return-box"></i>
-                    </div>
-                    <h3>Easy Return</h3>
-                    <p>Simple returns policy</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
