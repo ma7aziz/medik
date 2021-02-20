@@ -30,6 +30,9 @@ class ProductManager(models.Manager):
     def on_sale(self):
         return self.filter(sale_price__isnull=False)
 
+    def covid(self):
+        return self.filter(covid=True, active=True).order_by('-price')
+
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
@@ -52,7 +55,7 @@ class Product(models.Model):
     product_type = models.CharField(max_length=100, blank=True)
     brand = models.ForeignKey(
         Brand, on_delete=models.SET_NULL, null=True, blank=True)
-
+    covid = models.BooleanField(default=False)
     objects = ProductManager()
 
     def __str__(self):

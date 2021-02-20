@@ -6958,14 +6958,15 @@ blockquote::after,
 
 .page-title-area {
     text-align: center;
-    background-color: #f7f8fa;
+    background: linear-gradient(to right, #134e5e, #71b280);
     padding-top: 80px;
     padding-bottom: 80px
 }
 
 .page-title-content h1 {
     margin-bottom: 0;
-    font-size: 40px
+    font-size: 40px;
+    color: var(--white)
 }
 
 .page-title-content ul {
@@ -6978,7 +6979,8 @@ blockquote::after,
 .page-title-content ul li {
     display: inline-block;
     position: relative;
-    color: var(--mainColor);
+    /* color: var(--mainColor); */
+    color: var(--whiteColor);
     font-weight: 600;
     font-size: 16px;
     margin-left: 10px;
@@ -7011,7 +7013,8 @@ blockquote::after,
 
 .page-title-content ul li a {
     display: inline-block;
-    color: var(--optionalColor)
+    /* color: var(--optionalColor) */
+    color: rgba(255, 255, 255, 0.767)
 }
 
 .page-title-content ul li a:hover {

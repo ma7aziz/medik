@@ -109,27 +109,33 @@
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="single-products-box">
                             <div class="image">
-                                <a href="{% url 'product' product.slug  %}" class="d-block">
-                                    <img src="{{ product.main_image.url }}" alt="image"></a>
+                                <a href="{% url 'product' product.slug %}" class="d-block"><img
+                                        src="{{product.main_image.url}}" alt="image"></a>
                                 {% if product.sale_price %}
                                 <div class="sale">Sale</div>
                                 {% endif %}
+
                                 <div class="buttons-list">
                                     <ul>
                                         <li>
                                             <div class="cart-btn">
-                                                <a href="#">
+                                                <a id="quick_add">
                                                     <i class='bx bxs-cart-add'></i>
                                                     <span class="tooltip-label">Add to Cart</span>
                                                 </a>
+                                                <form action="{% url 'add_to_cart' %}" method="POST"
+                                                    id="quick_add_form">
+                                                    <input type="hidden" name="qty" value="1">
+                                                    <input type="hidden" name="product_id" value="{{product.id}}">
+                                                    {% csrf_token %}
+                                                </form>
                                             </div>
                                         </li>
-
                                         <li>
                                             <div class="quick-view-btn">
                                                 <a href="{% url 'product' product.slug %}">
                                                     <i class='bx bx-search-alt'></i>
-                                                    <span class="tooltip-label">Quick View</span>
+                                                    <span class="tooltip-label">View</span>
                                                 </a>
                                             </div>
                                         </li>
@@ -137,9 +143,8 @@
                                 </div>
                             </div>
                             <div class="content">
-                                <h3><a href="{% url 'product' product.slug %}">{{product}}</a></h3>
+                                <h3><a href="{% url 'product' product.slug %}">{{product|truncatechars:40}}</a></h3>
                                 <div class="price">
-
                                     {% if product.sale_price %}
                                     <span class="old-price">{{product.price}}</span>
                                     <span class="new-price">{{ product.sale_price }}</span>
