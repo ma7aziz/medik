@@ -32,17 +32,17 @@ def add_to_cart(request):
             if qty:
                 cart_item.qty += int(qty)
                 cart_item.save()
-                messages.success(request, 'Item added to your cart !')
+                messages.success(request, 'تم أضافة المنتج الي السلة')
             else:
                 cart_item.qty += 1
                 cart_item.save()
-                messages.success(request, 'Item added to your cart !')
+                messages.success(request, 'تم أضافة المنتج الي السلة')
 
         else:
             cart_item = Cart_item(
                 shopping_cart=cart, item=product, qty=qty)
             cart_item.save()
-            messages.success(request, 'Item added to your cart !')
+            messages.success(request, 'تم أضافة المنتج الي السلة')
 
     else:
         cart = Cart(session=request.session.session_key)
@@ -50,7 +50,7 @@ def add_to_cart(request):
         cart_item = Cart_item(
             item=product, shopping_cart=cart)
         cart_item.save()
-        messages.success(request, 'Item added to your cart !')
+        messages.success(request, 'تم أضافة المنتج الي السلة')
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
@@ -83,7 +83,7 @@ def delete_cart(request, cart_id):
     """
     cart = Cart_item.objects.get(id=cart_id)
     cart.delete()
-    messages.success(request, 'Item Removed From Your Cart !')
+    messages.success(request, 'تم حذف المنتج')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
